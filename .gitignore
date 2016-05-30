@@ -1,0 +1,9 @@
+*.zip
+*.rar
+*.exe
+*.spec
+*.pyz
+*.dll
+*.pyd
+search_exon/query_exon_info/*
+.idea/*
