@@ -42,7 +42,7 @@ class KeyBoard(QWidget):
                 grid.addWidget(button, *position)
         self.setLayout(grid)
 
-    def value_increse(self, num):
+    def value_increase(self, num):
         value = Decimal(str(self.value))
         value_int = int(value)
         value_fractional = value - value_int
@@ -52,15 +52,18 @@ class KeyBoard(QWidget):
             value = value_int + value_fractional
             self.value = value
         else:
-            value_fractional
+            value_fractional += Decimal(10) ** (int(value_fractional.log10()) - Decimal(2)) * num
+            value = value_int + value_fractional
+            self.value = value
 
     def slots(self, keyname):
         def slot():
             try:
                 n = int(keyname)
-                self.value_increse(n)
-            except:
-                pass
+                self.value_increase(n)
+            except ValueError:
+                if keyname == '.':
+                    self.int_part = False
 
         return slot
 
